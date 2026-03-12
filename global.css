@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom utility classes for Arisole StrideIQ */
+@layer utilities {
+  .glass-morphism {
+    @apply bg-white/70 backdrop-blur-xl border border-white/30 shadow-glass;
+  }
+  
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-xl border border-white/10;
+  }
+  
+  .glow-orange {
+    @apply shadow-glow;
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, #F26F05 0%, #FFCBA4 100%);
+  }
+}
