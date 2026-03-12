@@ -9,19 +9,28 @@ const FileSystemUploadType = {
   MULTIPART: 1,
 } as const;
 
-// Supabase configuration
-const SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_URL || 'https://your-project-id.supabase.co';
-const SUPABASE_ANON_KEY = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || 'your-supabase-anon-key';
+// Supabase configuration - MUST be set in .env file
+const SUPABASE_URL = process.env.EXPO_PUBLIC_SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
+
+// Validate configuration
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  console.error('[Supabase] ❌ Missing configuration. Please set EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY in your .env file');
+}
 
 // Create Supabase client
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-  auth: {
-    storage: AsyncStorage,
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: false,
-  },
-});
+export const supabase = createClient(
+  SUPABASE_URL || 'https://placeholder.supabase.co', 
+  SUPABASE_ANON_KEY || 'placeholder-key',
+  {
+    auth: {
+      storage: AsyncStorage,
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: false,
+    },
+  }
+);
 
 // =====================================================
 // SESSION CHECK UTILITY - For debugging auth issues
